@@ -1,5 +1,7 @@
 package ru.nsk.hgg2018.lelikov;
 
+import java.util.Scanner;
+
 public class Range {
     private double from;
     private double to;
@@ -25,37 +27,82 @@ public class Range {
         this.to = to;
     }
 
-    public double getLength() {
+    public double getIntervalLength() {
         return this.to - this.from;
     }
-
 
     public boolean isInside(double c) {
         return this.from <= c && c <= this.to;
     }
 
-    public int arithmeticMean() {
-        int a = (int) this.from;
-        int b = (int) this.to;
-        int count = 0;
-        int sum = 0;
-        int i = a;
-
-        while (i <= b) {
-            sum += i;
-            ++count;
-            ++i;
+    public Range getIntersection(Range secondInterval) {
+        if (this.from > secondInterval.to || this.to < secondInterval.from) {
+            return null;
+        } else {
+            return new Range(Math.max(this.from, secondInterval.from), Math.min(this.to, secondInterval.to));
         }
-        return sum / count;
+    }
+
+    public Range[] getIntervalsUnion(Range firstInterval, Range secondInterval, Range intersectionInterval) {
+        if (intersectionInterval == null) {
+            return new Range[]{firstInterval, secondInterval};
+        } else {
+            Range unionRange = new Range(Math.min(this.from, secondInterval.from), Math.max(this.to, secondInterval.to));
+            return new Range[]{unionRange};
+        }
+    }
+
+    public double getIntervalsDifference(Range firstInterval, Range secondInterval) {
+        return firstInterval.getIntervalLength() - secondInterval.getIntervalLength();
     }
 
     public static void main(String[] args) {
-        Range a = new Range(2.0, 7.2);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Задайте координаты первого интервала");
+        double a = scanner.nextDouble();
+        double b = scanner.nextDouble();
 
-        boolean result = a.isInside(3.4);
+        System.out.println("Задайте координаты второго интервала");
+        double c = scanner.nextDouble();
+        double d = scanner.nextDouble();
 
-        System.out.println(a.getLength());
-        System.out.println(result);
-        System.out.println(a.arithmeticMean());
+        System.out.print("Укажите число ");
+        double e = scanner.nextDouble();
+
+        Range firstInterval = new Range(a, b);
+        Range secondInterval = new Range(c, d);
+
+        Range intersectionInterval = firstInterval.getIntersection(secondInterval);
+
+        System.out.println("координаты интервала - пересечения");
+        if (intersectionInterval == null) {
+            System.out.println("Диапазоны не пересекаются");
+        } else {
+            System.out.println(intersectionInterval.from + " " + secondInterval.to);
+        }
+
+        System.out.println("Длина первого интервала");
+        System.out.println(firstInterval.getIntervalLength());
+
+        boolean result = firstInterval.isInside(e);
+        if (result) {
+            System.out.println("Точка c = " + e + " входит в первый интервал");
+        } else {
+            System.out.println("Точка c = " + e + " не входит в первый интервал");
+        }
+
+        Range[] array = firstInterval.getIntervalsUnion(firstInterval, secondInterval, intersectionInterval);
+        if (intersectionInterval == null) {
+            System.out.println("Массив объектов");
+            System.out.println(" от " + array[0].getFrom() + " до " + array[0].getTo());
+            System.out.println(" от " + array[1].getFrom() + " до " + array[1].getTo());
+        } else {
+            System.out.println("Результат объединения двух интервалов");
+            System.out.println(" от " + array[0].getFrom() + " до " + array[0].getTo());
+        }
+
+        double differenceInterval = firstInterval.getIntervalsDifference(firstInterval, secondInterval);
+        System.out.println("Разность двух интервалов");
+        System.out.println(differenceInterval);
     }
 }
