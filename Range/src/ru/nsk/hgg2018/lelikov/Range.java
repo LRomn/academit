@@ -43,9 +43,9 @@ public class Range {
         }
     }
 
-    public Range[] getIntervalsUnion(Range firstInterval, Range secondInterval, Range intersectionInterval) {
-        if (intersectionInterval == null) {
-            return new Range[]{firstInterval, secondInterval};
+    public Range[] getIntervalsUnion(Range secondInterval) {
+        if (this.from >= secondInterval.to || this.to <= secondInterval.from) {
+            return new Range[]{new Range(this.from,this.to), new Range(secondInterval.from,secondInterval.to)};
         } else {
             Range unionRange = new Range(Math.min(this.from, secondInterval.from), Math.max(this.to, secondInterval.to));
             return new Range[]{unionRange};
@@ -91,7 +91,7 @@ public class Range {
             System.out.println("Точка c = " + e + " не входит в первый интервал");
         }
 
-        Range[] array = firstInterval.getIntervalsUnion(firstInterval, secondInterval, intersectionInterval);
+        Range[] array = firstInterval.getIntervalsUnion(secondInterval);
         if (intersectionInterval == null) {
             System.out.println("Массив объектов");
             System.out.println(" от " + array[0].getFrom() + " до " + array[0].getTo());
