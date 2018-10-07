@@ -27,7 +27,7 @@ public class Range {
         this.to = to;
     }
 
-    public double getIntervalLength() {
+    public double getLength() {
         return this.to - this.from;
     }
 
@@ -36,7 +36,7 @@ public class Range {
     }
 
     public Range getIntersection(Range secondInterval) {
-        if (this.from > secondInterval.to || this.to < secondInterval.from) {
+        if (this.from >= secondInterval.to || this.to <= secondInterval.from) {
             return null;
         } else {
             return new Range(Math.max(this.from, secondInterval.from), Math.min(this.to, secondInterval.to));
@@ -53,7 +53,7 @@ public class Range {
     }
 
     public double getIntervalsDifference(Range firstInterval, Range secondInterval) {
-        return firstInterval.getIntervalLength() - secondInterval.getIntervalLength();
+        return firstInterval.getLength() - secondInterval.getLength();
     }
 
     public static void main(String[] args) {
@@ -82,7 +82,7 @@ public class Range {
         }
 
         System.out.println("Длина первого интервала");
-        System.out.println(firstInterval.getIntervalLength());
+        System.out.println(firstInterval.getLength());
 
         boolean result = firstInterval.isInside(e);
         if (result) {
