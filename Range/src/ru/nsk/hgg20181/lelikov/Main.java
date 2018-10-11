@@ -41,23 +41,25 @@ public class Main {
         }
 
         Range[] unionInterval = firstInterval.getIntervalsUnion(secondInterval);
-        if (intersectionInterval == null) {
-            System.out.println("Объединения двух интервалов.");
+
+        System.out.println("Объединения двух интервалов.");
+        if (unionInterval.length == 2) {
             System.out.println("Массив объектов");
             System.out.println(" от " + unionInterval[0].getFrom() + " до " + unionInterval[0].getTo());
             System.out.println(" от " + unionInterval[1].getFrom() + " до " + unionInterval[1].getTo());
         } else {
-            System.out.println("Объединение двух интервалов");
             System.out.println(" от " + unionInterval[0].getFrom() + " до " + unionInterval[0].getTo());
         }
 
         Range[] differenceInterval = firstInterval.getIntervalsDifference(secondInterval);
+
         System.out.println("Разность двух интервалов: ");
-        if (differenceInterval == null) {
+        if (differenceInterval.length == 0) {
             System.out.println("интервалы равны");
         } else if (differenceInterval.length == 1) {
             System.out.println(" от " + differenceInterval[0].getFrom() + " до " + differenceInterval[0].getTo());
         } else {
+            System.out.println("Массив объектов");
             System.out.println(" от " + differenceInterval[0].getFrom() + " до " + differenceInterval[0].getTo());
             System.out.println(" от " + differenceInterval[1].getFrom() + " до " + differenceInterval[1].getTo());
         }
