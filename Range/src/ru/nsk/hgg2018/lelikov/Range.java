@@ -52,19 +52,15 @@ public class Range {
 
     public Range[] getIntervalsDifference(Range secondInterval) {
         if (this.from > secondInterval.to || this.to < secondInterval.from) {
-            return new Range[]{new Range(this.from, this.to), new Range(secondInterval.from, secondInterval.to)};
-        } else if (this.from == secondInterval.to || this.to == secondInterval.from) {
-            return new Range[]{new Range(Math.min(this.from, secondInterval.from), Math.max(this.to, secondInterval.to))};
+            return new Range[]{new Range(this.from, this.to)};
         } else if (this.from < secondInterval.from && this.to > secondInterval.to) {
             return new Range[]{new Range(this.from, secondInterval.from), new Range(secondInterval.to, this.to)};
-        } else if (this.from < secondInterval.from && this.to < secondInterval.to) {
+        } else if (this.from == secondInterval.to || this.to == secondInterval.from) {
+            return new Range[]{new Range(Math.min(this.from, secondInterval.from), Math.max(this.to, secondInterval.to))};
+        } else if (this.from <= secondInterval.from && this.to <= secondInterval.to) {
             return new Range[]{new Range(this.from, secondInterval.from)};
-        } else if (this.from > secondInterval.from && this.to > secondInterval.to) {
+        } else if (this.from >= secondInterval.from && this.to >= secondInterval.to) {
             return new Range[]{new Range(secondInterval.to, this.to)};
-        } else if (this.from == secondInterval.from && this.to > secondInterval.to) {
-            return new Range[]{new Range(secondInterval.to, this.to)};
-        } else if (this.from < secondInterval.from && this.to == secondInterval.to) {
-            return new Range[]{new Range(this.from, secondInterval.from)};
         } else {
             return new Range[0];
         }

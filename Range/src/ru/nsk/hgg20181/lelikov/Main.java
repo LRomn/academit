@@ -55,7 +55,7 @@ public class Main {
 
         System.out.println("Разность двух интервалов: ");
         if (differenceInterval.length == 0) {
-            System.out.println("интервалы равны");
+            System.out.println("0");
         } else if (differenceInterval.length == 1) {
             System.out.println(" от " + differenceInterval[0].getFrom() + " до " + differenceInterval[0].getTo());
         } else {
