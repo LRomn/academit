@@ -2,6 +2,7 @@ package ru.nsk.hgg20183.lelikov;
 
 import ru.nsk.hgg20182.lelikov.*;
 
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,5 +19,31 @@ public class Main {
         shapesArray[9] = new Circle(2);
         shapesArray[10] = new Circle(3);
         shapesArray[11] = new Circle(5);
+
+        Arrays.sort(shapesArray, new ShapesSortByAreaComparator());
+
+        for (Shapes shapes : shapesArray) {
+            if (shapes == shapesArray[shapesArray.length - 1]) {
+                System.out.println("Фигура с наибольшей площадью: ");
+                System.out.println("Площадь фигуры = " + shapes.getArea());
+                System.out.println("Периметр фигуры = " + shapes.getPerimeter());
+                System.out.println("Высота фигуры =  " + shapes.getHeight());
+                System.out.println("Ширина фигуры =  " + shapes.getWidth());
+            }
+        }
+
+        System.out.println();
+
+        Arrays.sort(shapesArray, new ShapesSortByPerimeterComparator());
+
+        for (Shapes shapes : shapesArray) {
+            if (shapes == shapesArray[shapesArray.length - 2]) {
+                System.out.println("Фигура со вторым по велечине периметром: ");
+                System.out.println("Площадь фигуры = " + shapes.getArea());
+                System.out.println("Периметр фигуры = " + shapes.getPerimeter());
+                System.out.println("Высота фигуры =  " + shapes.getHeight());
+                System.out.println("Ширина фигуры =  " + shapes.getWidth());
+            }
+        }
     }
 }
