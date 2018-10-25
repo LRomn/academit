@@ -1,6 +1,6 @@
-package ru.nsk.hgg20182.lelikov;
+package ru.nsk.academits.lelikov.shape;
 
-public class Rectangle implements Shapes {
+public class Rectangle implements Shape {
     private double firstSideLength;
     private double secondSideLength;
 

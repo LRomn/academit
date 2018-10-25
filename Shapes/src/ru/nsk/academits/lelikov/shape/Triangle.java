@@ -1,6 +1,6 @@
-package ru.nsk.hgg20182.lelikov;
+package ru.nsk.academits.lelikov.shape;
 
-public class Triangle implements Shapes {
+public class Triangle implements Shape {
     private double x1;
     private double x2;
     private double x3;
@@ -73,19 +73,25 @@ public class Triangle implements Shapes {
         return Math.max(this.y1, Math.max(this.y2, this.y3)) - Math.min(this.y1, Math.min(this.y2, this.y3));
     }
 
+    private double getCutLengthA() {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+
+    private double getCutLengthB() {
+        return Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
+    }
+
+    private double getCutLengthC() {
+        return Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
+    }
+
     public double getArea() {
-        double a = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-        double b = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
-        double c = Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
-        double semiPerimeter = (a + b + c) / 2;
-        return Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
+        double semiPerimeter = (getCutLengthA() + getCutLengthB() + getCutLengthC()) / 2;
+        return Math.sqrt(semiPerimeter * (semiPerimeter - getCutLengthA()) * (semiPerimeter - getCutLengthB()) * (semiPerimeter - getCutLengthB()));
     }
 
     public double getPerimeter() {
-        double a = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-        double b = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
-        double c = Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
-        return a + b + c;
+        return getCutLengthA() + getCutLengthB() + getCutLengthC();
     }
 
     @Override

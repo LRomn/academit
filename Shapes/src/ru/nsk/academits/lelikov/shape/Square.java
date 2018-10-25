@@ -1,6 +1,6 @@
-package ru.nsk.hgg20182.lelikov;
+package ru.nsk.academits.lelikov.shape;
 
-public class Square implements Shapes {
+public class Square implements Shape {
     private double squareLength;
 
     public Square(double squareLength) {
