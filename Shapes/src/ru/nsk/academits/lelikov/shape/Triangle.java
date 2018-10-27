@@ -73,25 +73,20 @@ public class Triangle implements Shape {
         return Math.max(this.y1, Math.max(this.y2, this.y3)) - Math.min(this.y1, Math.min(this.y2, this.y3));
     }
 
-    private double getCutLengthA() {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    }
-
-    private double getCutLengthB() {
-        return Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
-    }
-
-    private double getCutLengthC() {
-        return Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
+    private double getCutLength(double pointX1, double pointX2, double pointY1, double pointY2) {
+        return Math.sqrt(Math.pow(pointX1 - pointX2, 2) + Math.pow(pointY1 - pointY2, 2));
     }
 
     public double getArea() {
-        double semiPerimeter = (getCutLengthA() + getCutLengthB() + getCutLengthC()) / 2;
-        return Math.sqrt(semiPerimeter * (semiPerimeter - getCutLengthA()) * (semiPerimeter - getCutLengthB()) * (semiPerimeter - getCutLengthB()));
+        double lengthA = getCutLength(x2, x1, y2, y1);
+        double lengthB = getCutLength(x3, x2, y3, y2);
+        double lengthC = getCutLength(x3, x1, y3, y1);
+        double semiPerimeter = (lengthA + lengthB + lengthC) / 2;
+        return Math.sqrt(semiPerimeter * (semiPerimeter - lengthA) * (semiPerimeter - lengthB) * (semiPerimeter - lengthC));
     }
 
     public double getPerimeter() {
-        return getCutLengthA() + getCutLengthB() + getCutLengthC();
+        return getCutLength(x2, x1, y2, y1) + getCutLength(x3, x2, y3, y2) + getCutLength(x3, x1, y3, y1);
     }
 
     @Override

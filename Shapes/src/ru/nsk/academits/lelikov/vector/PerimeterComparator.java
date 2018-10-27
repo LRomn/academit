@@ -1,10 +1,10 @@
-package ru.nsk.academits.lelikov.shape2;
+package ru.nsk.academits.lelikov.vector;
 
 import ru.nsk.academits.lelikov.shape.Shape;
 
 import java.util.Comparator;
 
-public class ShapesSortByPerimeterComparator implements Comparator<Shape> {
+public class PerimeterComparator implements Comparator<Shape> {
 
     @Override
     public int compare(Shape perimeter1, Shape perimeter2) {
