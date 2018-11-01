@@ -73,7 +73,7 @@ public class Triangle implements Shape {
         return Math.max(this.y1, Math.max(this.y2, this.y3)) - Math.min(this.y1, Math.min(this.y2, this.y3));
     }
 
-    private static double getCutLength(double pointX1, double pointX2, double pointY1, double pointY2) {
+    private double getCutLength(double pointX1, double pointX2, double pointY1, double pointY2) {
         return Math.sqrt(Math.pow(pointX1 - pointX2, 2) + Math.pow(pointY1 - pointY2, 2));
     }
 

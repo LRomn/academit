@@ -1,4 +1,4 @@
-package ru.nsk.academits.lelikov.shape2;
+package ru.nsk.academits.lelikov.vector;
 
 import ru.nsk.academits.lelikov.shape.*;
 
